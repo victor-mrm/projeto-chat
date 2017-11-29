@@ -1,0 +1,11 @@
+
+
+
+
+
+
+
+
+
+
+1 - O método post não está fazendo com que o index "Usuario_id1" e "recebidas" receba o id do amigo, na hora que passa pelas rotas
