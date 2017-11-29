@@ -35,7 +35,7 @@ and open the template in the editor.
         <br>
         <br>
         
-        <img class="circle" src="public/img/padrao.jpg" alt=""/>
+        <img class="circle" src="public/img/<?= $pessoa['foto']?>" alt=""/>
         <br>
         <br>
         <br>
@@ -57,17 +57,6 @@ and open the template in the editor.
     <div class="card-panel teal lighten-2 row col s12 offset-s0"><span class="flow-text"><font color="white"><strong>Adicionar amigos</font></strong></span>
       
       
-   <nav>
-    <div class="nav-wrapper">
-      <form>
-        <div class="input-field">
-          <input id="search" value="<?=$like?>" type="search" required>
-          <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-          <i class="material-icons">close</i>
-        </div>
-      </form>
-    </div>
-  </nav>
       
       
       </div>
@@ -77,16 +66,16 @@ and open the template in the editor.
         </div>
         
         
-        
+      
 
       <?php foreach($inimigo as $i): ?>
         <div>
         <form action="/addamigos" method="post">
         <ul class="collection">
         <li class="collection-item avatar">
-      <img src="public/img/padrao.jpg" alt="" class="circle">
+      <img src="public/img/<?= $i['foto'] ?>" alt="" class="circle">
       <span class="teal-text text-accent-4"><?= $i['nome'];?></span>
-      <p><?= $i['status'];?></p>
+      <p> <?= $i['status'] == '' ? "Hey there,I'm using Emira's Friends" : $i['status']; ?> </p> 
       <input type="hidden" name="id" value=<?=$i['id']?>>
       <button class="waves-effect waves-light btn secondary-content"><i class="material-icons">add</i></button>
     </li>

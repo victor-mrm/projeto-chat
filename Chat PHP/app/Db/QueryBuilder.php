@@ -99,22 +99,22 @@ class QueryBuilder
     }
 
 
-        public function updateFoto($values, $id)
+        public function updateFoto($foto, $id)
        {
 
         $sql = "update usuario
 
-                set foto = :foto,
+                set foto = :foto
 
                 where id = :id"; 
 
         $s = $this->pdo->prepare($sql);
 
         
-
         $s->bindParam(':id', $id);
-        $s->bindParam(':nome', $values['nome']);
-        $s->bindParam(':email', $values['email']);
+        $s->bindParam(':foto', $foto);
+
+        
         
         
 
@@ -157,7 +157,7 @@ class QueryBuilder
 
     public function selectAmigos($id)
     {
-        $sql = "select usuario.nome,usuario.status,amizade.usuario_id1
+        $sql = "select usuario.nome,usuario.status, usuario.foto ,amizade.usuario_id1
                 from amizade
                 inner join usuario
                 on usuario.id = amizade.usuario_id1
@@ -180,7 +180,7 @@ class QueryBuilder
     public function selectInimigos($id)
     {
 
-        $sql = "select id,nome,status from usuario where id not in(select usuario.id
+        $sql = "select id,nome,status,foto from usuario where id not in(select usuario.id
                 from amizade
                 inner join usuario
                 on usuario.id = amizade.usuario_id1
@@ -250,27 +250,8 @@ class QueryBuilder
     }
 
 
-    public function selectLike($like)
-{
-    $like = '%'.$like.'%';
-    $sql = "select nome,id from usuario where id not in(select usuario.id
-                from amizade
-                inner join usuario
-                on usuario.id = amizade.usuario_id1
-                where amizade.usuario_id = :id or amizade.usuario_id1 = :id ) like :like"; 
-    $s = $this->pdo->prepare($sql);
-
-    $s->bindParam(':like', $like);
-
-    try{
-        $s->execute();
-
-        return $s->fetchAll(\PDO::FETCH_ASSOC);
-
-    }  catch(\PDOException $e){
-         die($e->getMessage());
-    }
+  
 }
     
-}
+
 

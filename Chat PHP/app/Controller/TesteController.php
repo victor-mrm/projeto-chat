@@ -63,24 +63,24 @@ class TesteController
           public function updateFoto()
     {
         //recebe as alterações do form
-        $dado['arquivo'] =  isset($_POST['arquivo']) ? $_POST['arquivo'] :'';
-
+        //$dado['arquivo'] =  isset($_FILES['arquivo']) ? $_FILES['arquivo'] :'';
+      
+      
         if(isset($_FILES['arquivo'])){
-            $extensao = strtolower(substr($_FILES['arquivo']['name'], -4));
-            $novo_nome = md5(time()) . $extensão;
+            $novo_nome = md5(time()) . '.jpg';
             $dir = "public/img/";
-            move_uploaded_file($_FILES['arquivo']['tmp_name'], $dir, $novo_nome);
+            move_uploaded_file($_FILES['arquivo']['tmp_name'], $dir . $novo_nome);
         }
         
         //acessar o bd
         $q = new QueryBuilder();
         //busca os dados
-        $pessoa = $q->select('usuario', ['id' => $_SESSION['user']], true);
-        $newdados = $q->updateFoto($dado, $_SESSION['user']);
+        $newdados = $q->updateFoto($novo_nome, $_SESSION['user']);
 
         //acessar pagina
-        require './app/views/perfil.php';
-
+        //require './app/views/perfil.php';
+        header('Location: /perfil');
+        
     }
 
     public function salvarconversa()
@@ -158,26 +158,6 @@ class TesteController
 
     }
 
-    public function searchAmigos()
-    {
-        
-        //acessar o bd
-        $q = new QueryBuilder();
-
-
-        //mostra o nome do user logado
-        $search = $q->selectLike('usuario', ['id' => $_SESSION['user']], true);
-
-        //mostra os inimigos
-        $inimigo = $q->selectInimigos($_SESSION['user']);
-        
-        
-
-        
-        require './app/views/addAmigos.php';
-
-    }
-
 
         
     public function showAdicionar()
@@ -186,16 +166,13 @@ class TesteController
         //acessar o bd
         $q = new QueryBuilder();
 
-
         //mostra o nome do user logado
         $pessoa = $q->select('usuario', ['id' => $_SESSION['user']], true);
 
         //mostra os inimigos
         $inimigo = $q->selectInimigos($_SESSION['user']);
-        
-        
 
-        
+    
         require './app/views/addAmigos.php';
 
     }

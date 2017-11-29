@@ -49,7 +49,7 @@
             <br>
             <br>
 
-            <img class="circle" src="public/img/padrao.jpg" alt="" />
+            <img class="circle" src="public/img/<?= $pessoa['foto']?>" alt="" />
             <br>
             <br>
             <br>

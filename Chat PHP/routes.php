@@ -72,6 +72,7 @@ switch ($uri) {
         $testeController->update();
         break;
 
+
         case '/updateFoto';
 
         $testeController->updateFoto();

@@ -42,7 +42,7 @@
       <br>
       <br>
 
-      <img class="circle" src="public/img/padrao.jpg" alt="" />
+      <img class="circle" src="public/img/<?= $pessoa['foto']?>" alt="" />
       <br>
       <br>
       <br>
@@ -77,12 +77,12 @@
 
           <li class="collection-item avatar">
 
-            <img src="public/img/padrao.jpg" alt="" class="circle">
+            <img src="public/img/<?= $d['foto']?>" alt="" class="circle">
 
             <span class="teal-text text-accent-4"><?= $d['nome'] ?> </span>
 
 
-            <p><?= $d['status'] ?></p>
+            <p><?= $d['status'] == '' ? "Hey there,I'm using Emira's Friends" : $d['status']; ?></p>
             
              <form action="/conversa" method="get">
               <input value="<?= $d['usuario_id1'] ?>" type="hidden" name="id_amigo">
